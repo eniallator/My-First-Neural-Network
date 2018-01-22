@@ -11,7 +11,14 @@ class NeuralNetwork():
             self._architecture.append(current_layer)
 
     def feed_forward(self, inputs):
+        self._last_inputs = inputs
         last_outputs = inputs
         for layer in self._architecture:
             last_outputs = [neuron.activate(last_outputs) for neuron in layer]
         return last_outputs
+
+    def back_prop(self, expected_outputs):
+        layer = self._architecture[-1]
+        for i, neuron in enumerate(layer):
+            # assumes same number of inputs as neurons
+            print(neuron.back_prop(expected_outputs[i], self._last_inputs[i]))

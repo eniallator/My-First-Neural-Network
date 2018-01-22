@@ -2,12 +2,23 @@ import math
 from src.NeuralNetwork import NeuralNetwork
 
 
-def main(inputs):
+def init_network(architecture):
     normalize = lambda num: 1 / (1 + math.e ** -num)
-    architecture = [784, 16, 16, 10]
-    neural_network_instance = NeuralNetwork(architecture, normalize)
-    print(neural_network_instance.feed_forward(inputs))
+    return NeuralNetwork(architecture, normalize)
 
 
-if __name__ == '__main__':
-    main()
+def cost(label, outputs):
+    return [((1 if i == label else 0) - output) ** 2 for i, output in enumerate(outputs)]
+
+
+def main(inputs, labels, architecture):
+    beautify = lambda in_list: ['%f' % item for item in in_list]
+    network = init_network(architecture)
+    outputs = network.feed_forward(inputs[0])
+    print(beautify(outputs))
+    print(beautify(cost(labels[0], outputs)))
+
+# if __name__ == '__main__':
+#     main()
+
+# up to 5:33 in backpropagation 

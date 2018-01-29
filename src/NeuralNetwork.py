@@ -4,6 +4,7 @@ class NeuralNetwork():
     
     def __init__(self, network_architecture, normalize):
         self._architecture = []
+        self._normalize = normalize
 
         for index, layer_size in enumerate(network_architecture):
             input_size = -1 if not index else network_architecture[index - 1]
@@ -18,6 +19,9 @@ class NeuralNetwork():
         return last_outputs
 
     def back_prop(self, expected_outputs):
+        deriv_cost_activation = lambda y, a: 2 * (a - y)
+        deriv_activation = lambda a: self._normalize(a) * (1 - self._normalize(a))
+
         layer = self._architecture[-1]
         for i, neuron in enumerate(layer):
             # assumes same number of inputs as neurons

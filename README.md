@@ -9,9 +9,13 @@ For each training example:
     - `(desired_outputs, actual_outputs) => cost`
 2. Calculate and store the cost of weights and biases for last layer.
     - for each neuron:
-    - `(last_layer_activations, current_layer_weights, current_layer_biases) => cost_wb`
-3. Calculate the cost of the previous layer activations - use these to propagate backwards (using step 2 for previous layers).
-    - `() => cost_a`
+    - `(last_layer_activations, desired_output) => <store cost for each weight/bias in neuron>`
+3. Calculate and cache the cost of the previous layer's activation functions.
+    - for each neuron:
+    - `(desired_output) => cost_a`
+    - return and cache the cost
+4. Iterate over each neuron in the previous layer and sum the costs.
+5. For each neuron in the previous layer propagate backwards from the cost.
 
 ### Afterwards
 

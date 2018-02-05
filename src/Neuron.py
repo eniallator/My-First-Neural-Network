@@ -11,4 +11,5 @@ class Neuron():
     def activate(self, inputs):
         output = sum([inp * weight for inp, weight in zip(inputs, self.weights)]) - self.bias
         self.last_output = output
-        return self._normalize(output)
+        self.last_normalized_output = self._normalize(output)
+        return self.last_normalized_output

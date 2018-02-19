@@ -26,3 +26,13 @@ class NeuralNetwork():
         for i, neuron in enumerate(layer):
             # assumes same number of inputs as neurons
             print(neuron.back_prop(expected_outputs[i], self._last_inputs[i]))
+
+"""
+FUNCTION calculate_cost(neurons, desired_output)
+    sum = 0
+    FOR i=0 UP TO neurons.length() DO
+        sum = sum + (neurons[i].activation - desired_output) ^ 2
+    END FOR
+    RETURN sum
+END FUNCTION
+"""
